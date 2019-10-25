@@ -2,7 +2,7 @@ package edu.smith.cs.csc212.lists;
 
 import me.jjfoley.adt.ListADT;
 import me.jjfoley.adt.errors.BadIndexError;
-import me.jjfoley.adt.errors.TODOErr;
+//import me.jjfoley.adt.errors.TODOErr;
 
 /**
  * A Singly-Linked List is a list that has only knowledge of its very first
@@ -75,24 +75,49 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 
 	@Override
 	public void addBack(T item) {
-		throw new TODOErr();
+		if (this.start == null) {
+			this.start = new Node<T>(item, null);
+		} else {
+			Node<T> now = this.start;
+			while (now.next != null) {
+				now = now.next;
+			}
+			now.next = new Node<T>(item, null);
+		}
 	}
 
 	@Override
 	public void addIndex(int index, T item) {
-		throw new TODOErr();
-	}
+		if (index > this.size() || index < 0) {
+			throw new BadIndexError(index);
+		} else if (index == 0) {
+			this.addFront(item);
+		} else {
+			Node<T> now = this.start;
 
+			for (int i = 0; i < index-1; i++) {
+				now = now.next;
+			}
+			
+			Node<T> temp = now.next;
+			now.next = new Node<T>(item, temp);
+		}
+	}
+ 
 	@Override
 	public T getFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		return start.value;
 	}
 
 	@Override
 	public T getBack() {
 		checkNotEmpty();
-		throw new TODOErr();
+		Node<T> now = this.start;
+		while (now.next != null) {
+			now = now.next;
+		}
+		return now.value;
 	}
 
 	@Override
@@ -110,7 +135,16 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public void setIndex(int index, T value) {
 		checkNotEmpty();
-		throw new TODOErr();
+		if (index > this.size()-1 || index < 0) {
+			throw new BadIndexError(index);
+		}
+		int curr = 0;
+		for (Node<T> n = this.start; n != null; n = n.next) {
+			if (curr == index) {
+				n.value = value;
+			}
+			curr++;
+		}
 	}
 
 	@Override
