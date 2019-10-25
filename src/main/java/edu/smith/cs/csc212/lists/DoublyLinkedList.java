@@ -31,7 +31,14 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T removeFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		T v = this.start.value;
+		if (this.start.after == null) {
+			return v;
+		} else {
+			this.start = this.start.after;
+			this.start.before = null;
+			return v;
+		}
 	}
 
 	@Override
@@ -89,12 +96,19 @@ public class DoublyLinkedList<T> extends ListADT<T> {
 
 	@Override
 	public int size() {
-		throw new TODOErr();
+		if (isEmpty()) {
+			return 0;
+		}
+		int size = 0;
+		for (Node<T> now = this.start; now.after != null; now = now.after) {
+			size++;
+		}
+		return size;
 	}
 
 	@Override
 	public boolean isEmpty() {
-		throw new TODOErr();
+		return this.start == null && this.end == null;
 	}
 	
 	/**

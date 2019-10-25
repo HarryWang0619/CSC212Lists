@@ -50,12 +50,9 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 		checkNotEmpty();
 
 		if(index == 0) {
-			T v = this.start.value;
-			this.start=null; 
-			return v;
-			
+			return removeFront();
+		} 
 		// else check the pointers of its linked nodes
-		}
 
 		Node<T> temp = this.start;
 		for (int i = 1; i < index; i++) {
@@ -94,11 +91,9 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 			this.addFront(item);
 		} else {
 			Node<T> now = this.start;
-
 			for (int i = 0; i < index-1; i++) {
 				now = now.next;
-			}
-			
+			}			
 			Node<T> temp = now.next;
 			now.next = new Node<T>(item, temp);
 		}

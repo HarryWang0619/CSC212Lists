@@ -167,21 +167,30 @@ public class SinglyLinkedListTest {
 			Assert.assertEquals(i+1, items1.size());
 			Assert.assertEquals((i+1)*3, (int) items1.getBack()); 
 		}
-		
+		//System.out.println(items1);
+
 		Random rand = new Random(13);
 		ListADT<Integer> items2 = makeEmptyList();
 		
 		// If this test runs forever, make sure removeIndex actually removes things.
 		int limit = 0;
 		while(!items1.isEmpty()) {
+			//System.out.println(items2);
+
+			int startSize = items2.size();
 			int value = items1.removeIndex(rand.nextInt(items1.size()));
 			insertSorted(items2, value);
+			//System.out.println(items2 + " value="+value);
+
+			Assert.assertEquals(items2.size(), startSize+1);
 			if (limit++ > N) {
 				throw new AssertionError("Something wrong with isEmpty, I think...?");
 			}
 		}
 		
+		//System.out.println(items2);
 		for (int i=0; i<N; i++) {
+			//System.out.println((i+1)*3 + " and " + items2.getIndex(i));
 			Assert.assertEquals((i+1)*3, (int) items2.getIndex(i)); 
 		}
 	}
