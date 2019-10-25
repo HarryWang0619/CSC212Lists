@@ -21,17 +21,51 @@ public class SinglyLinkedList<T> extends ListADT<T> {
 	@Override
 	public T removeFront() {
 		checkNotEmpty();
-		throw new TODOErr();
+		T v = this.start.value;
+		this.start = this.start.next;
+		return v;
 	}
 
 	@Override
 	public T removeBack() {
-		throw new TODOErr();
+		checkNotEmpty();
+		if(this.start.next==null) {
+			T v = start.value;
+			start = null;
+			return v;
+		}
+
+		Node<T> t = this.start;
+		while (t.next.next != null) {
+			t = t.next;
+		}
+		T v = t.next.value;
+		t.next.value = null;
+		t.next = null;
+		return v;
 	}
 
 	@Override
 	public T removeIndex(int index) {
-		throw new TODOErr();
+		checkNotEmpty();
+
+		if(index == 0) {
+			T v = this.start.value;
+			this.start=null; 
+			return v;
+			
+		// else check the pointers of its linked nodes
+		}
+
+		Node<T> temp = this.start;
+		for (int i = 1; i < index; i++) {
+			temp = temp.next;
+		}
+		T v = temp.next.value;
+		temp.next.value = null;
+		temp.next = temp.next.next;
+
+		return v;
 	}
 
 	@Override
