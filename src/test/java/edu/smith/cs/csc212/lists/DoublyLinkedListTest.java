@@ -71,6 +71,7 @@ public class DoublyLinkedListTest {
 		Assert.assertEquals(false, data.isEmpty());
 		data.addFront("0");
 		Assert.assertEquals(2, data.size());
+		//System.out.println(data.getIndex(0));
 		Assert.assertEquals("0", data.getIndex(0));
 		Assert.assertEquals("1", data.getIndex(1));
 		Assert.assertEquals(false, data.isEmpty());
@@ -78,6 +79,7 @@ public class DoublyLinkedListTest {
 		Assert.assertEquals(3, data.size());
 		Assert.assertEquals("-1", data.getIndex(0));
 		Assert.assertEquals("0", data.getIndex(1));
+		// System.out.println(data.getIndex(1));
 		Assert.assertEquals("1", data.getIndex(2));
 		Assert.assertEquals(false, data.isEmpty());
 		data.addFront("-2");
